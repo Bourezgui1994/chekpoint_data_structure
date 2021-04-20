@@ -1,0 +1,124 @@
+
+ALGORITHM Data_structure 
+
+// Problem 1 Solution 1
+
+
+VAR
+  // Declaring variable 
+
+    tab1,tab2:ARRAY_OF INTEGER;
+    i,j,sum,:INTEGER:=0;
+    equal:BOOLEAN:=False;
+    
+    
+
+    
+BEGIN
+// Read all the variable
+    Write (write the elements of tab1);
+    Read(tab1[i]);
+    Write (write the elements of tab2 );
+    Read(tab2[j]);
+    Read (sum);
+    Read(equal)
+
+
+// Find the distinct element from tab1
+
+    FOR i FROM 0 TO tab1.length-1 STEP 1  DO
+      
+      FOR j FROM 0 TO tab2.length-1 STEP 1  DO
+        IF (tab1[i]=tab2[j]) THEN
+          equal:=TRUE;
+        END_IF
+      END_FOR
+
+      IF (equal=False) THEN
+        sum:=sum+tab1[i];
+      END_IF
+
+    END_FOR
+
+
+// Find the distinct element from tab2
+
+FOR j FROM 0 TO tab2.length-1 STEP 1  DO
+      
+      FOR i FROM 0 TO tab2.length-1 STEP 1  DO
+        IF (tab2[j]=tab1[i]) THEN
+          equal:=TRUE;
+        END_IF
+      END_FOR
+
+      IF (equal=False) THEN
+        sum:=sum+tab2[j];
+      END_IF
+
+    END_FOR
+
+
+END
+   
+
+// Problem 2 solution 2 
+
+
+
+    VAR
+     htab1,htab2 :HASH_TABLE <INTEGER,INTEGER>;
+     tab1,tab2 :ARRAY_OF INTEGER;
+     i,j,sum,:INTEGER:=0;
+     equal:BOOLEAN:=False;
+     
+
+    BEGIN
+
+// insert all element of tab1 in htab1
+
+    FOR i FROM 0 TO tab1.length-1 STEP 1 DO
+      htab1.insert(i,tab1[i])
+    END_FOR
+    Read(htab1);
+
+// insert all element of tab2 in htab2
+
+    FOR j FROM 0 TO tab2.length-1 STEP 1 DO
+      htab2.insert(j,tab2[j])
+    END_FOR
+    Read(htab2);
+
+// Find the distinct element from htab1
+
+    FOR i FROM 0 TO htab1.length-1 STEP 1  DO
+    FOR j FROM 0 TO htab2.length-1 STEP 1 DO
+    IF (htab1.lookup(i)=TRUE and htab2.lookup(j)=TRUE and htab1.get(i)=htab2.get(j)) THEN
+      equal=TRUE;
+    END_IF
+
+    END_FOR
+
+     IF (htab1.lookup(i)=TRUE and htab2.lookup(j)=TRUE and equal=False) THEN
+        sum:=sum+htab1.get(i);
+      END_IF
+      
+    END_FOR
+
+// Find the distinct element from htab2
+
+    FOR j FROM 0 TO htab2.length-1 STEP 1  DO
+    FOR i FROM 0 TO htab1.length-1 STEP 1 DO
+    IF (htab1.lookup(i)=TRUE and htab2.lookup(j)=TRUE and  htab2.get(j)=htab1.get(i)) THEN
+      equal=TRUE;
+    END_IF
+
+    END_FOR
+
+     IF (htab1.lookup(i)=TRUE and htab2.lookup(j)=TRUE and equal=False) THEN
+        sum:=sum+htab2.get(j);
+      END_IF
+      
+    END_FOR
+
+      
+    END
